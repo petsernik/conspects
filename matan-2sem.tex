@@ -1,0 +1,614 @@
+\documentclass{article}
+\usepackage{amssymb} %math
+\usepackage{amsmath} %math
+\usepackage{cmap} %ability to copy russian
+\usepackage[T2A]{fontenc} %encoding for babel
+\usepackage[russian]{babel} %russian
+\usepackage{amsthm} %theorems
+\usepackage{imakeidx} %indexing
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{graphicx} %images
+\usepackage{hyperref} %hyperlinks
+\pagestyle{fancy}
+\makeindex[title=Указатель, intoc, options=-s file.ist]
+
+\fancyhead{}
+\fancyhead[LO]{\hyperlink{t1}{к содержанию}}
+\fancyhead[CO]{\hyperlink{t2}{к указателю}}
+
+\hypersetup{
+     colorlinks=true,
+     linkcolor=magenta,
+     filecolor=red,
+     citecolor=red,      
+     urlcolor=blue,
+}
+
+\title{\hypertarget{t1}{Билеты по матанализу за второй семестр}}
+\author{}
+\date{}
+
+\newtheoremstyle{indented}{0 pt}{0 pt}{\itshape}{}{\bfseries}{. }{0 em}{ }
+\theoremstyle{indented}
+\newtheorem{theorem}{Теорема}
+\newtheorem{lemma}{Лемма}
+\newtheorem{stat}{Утверждение}
+
+\theoremstyle{definition} 
+\newtheorem{defn}{Определение}
+\newtheorem{exl}{Пример(ы)}
+
+
+\theoremstyle{remark} 
+\newtheorem{remark}{Примечание}
+\newtheorem{remind}{Напоминание}
+\newtheorem{cons}{Следствие}
+\newtheorem{exer}{Упражнение}
+
+\newcommand{\htarg}[2]{\hypertarget{#1}{\textcolor{magenta}{#2}}}
+\newcommand{\hlink}[2]{\hyperlink{#1}{#2}}
+\newcommand{\hindex}[2]{\index{#2@\protect\hyperlink{#1}{#2}}}
+\newcommand{\add}[2]
+{
+    \hypertarget{#1}{\textcolor{magenta}{#2}}
+    \index{#2@\protect\hyperlink{#1}{#2}}
+}
+
+
+\begin{document}
+
+
+\maketitle
+\tableofcontents
+
+\newpage
+
+
+\section{Функции ограниченной вариации. Свойства. Замена переменной. Примеры.}
+
+
+\begin{defn}
+    \add{var}{Вариация функции}
+    $f: \mathbb{R} \to \mathbb{R}^m$
+    \[
+        V_f([a,b])=\sup\limits_{
+            \begin{smallmatrix}
+                x_0 \leq x_1 \leq \dots \leq x_n \\
+                x_0=a, x_n=b
+            \end{smallmatrix}
+        }
+        \sum\limits_{k=0}^{n-1} |f(x_{k+1})-f(x_k)|
+    \]
+\end{defn}
+
+\begin{remark}
+    Свойства вариации
+    \begin{itemize}
+        \item $f: \mathbb{R}\to\mathbb{R}, f$ монотонна $\Rightarrow V_f([a,b])=|f(a)-f(b)|$
+        \item $V_f([a,b])=0 \Leftrightarrow f$ константо на $[a,b]$
+        \item $V_{f+g} \leq V_f + V_g$
+        \item $V_f$ аддитивна по промежутку: \\ $a\leq b\leq c: V_f([a,c])=V_f([a,b])+V_f([b,c])$
+    \end{itemize}
+\end{remark}
+
+\begin{remark}\hindex{bound var}{Ограниченная вариация}
+    Будем говорить, что $f$ имеет \htarg{bound var}{ограниченную вариацию}
+    на $[a,b]$, если $V_f$ конечна на $[a,b]$
+\end{remark}
+
+\begin{stat}
+    Для $f: \mathbb{R}\to\mathbb{R}$ следующие утверждения эквивалентны
+    \begin{enumerate}
+        \item $f$ имеет ограниченную вариацию на $[a,b]$
+        \item $f=f_1-f_2$, для каких-то  $f_1, f_2$ неубывающих на $[a,b]$
+    \end{enumerate}
+\end{stat}
+
+\begin{proof}
+    "$1\rightarrow2$": рассмотрим $\phi(x) = V_f([a,x]) \Rightarrow \phi \nearrow$\\
+    $f = \phi - (\phi-f)$, пусть $h=\phi-f$. $h\nearrow \Leftrightarrow$ при $x\leq y$:
+    $h(x)\leq h(y) \Leftrightarrow \phi(x)-f(x) \leq \phi(y)-f(y) \Leftrightarrow f(y)-f(x) \leq \phi(y) - \phi(x) = V_f([x,y])$\\
+    "$2\rightarrow1$": $V_{f_1-f_2}[a,b] \leq V_{f_1}[a,b] + V_{-f_2}[a,b] = |f_1(a)-f_1(b)|+|f_2(a)-f_2(b)|$
+\end{proof}
+
+\begin{stat}
+    (\add{replace var}{Замена переменной в вариации})
+    Пусть $g: [a,b] \to [c,d]$ непрерывная биекция,
+    тогда $V_f[c,d]=V_{f\circ g}[a,b]$
+\end{stat}
+
+\begin{proof}
+    $g$ монотонна, будем считать, что возрастает. Любому набору $x_0, x_1, \dots, x_n$ из определения вариации $V_f$ найдутся соответсвующие  $y_0, y_1, \dots, y_n$,
+    удовлетворяющие условию $g(y_k)=x_k$ и подходящие для подстановки в определение $V_{f\circ g}$, т.к. $y_k \nearrow \Leftrightarrow g(y_k) \nearrow$. Тогда $V_f[c,d]\leq V_{f\circ g}[a,b]$,
+    но с другой стороны $V_f[c,d]\geq V_{f\circ g}[a,b]$, т.к. можно подставлять $x_k:=g(y_k)$ в определение первой вариации.
+\end{proof}
+
+
+\section{Естественная параметризация. Гладкие пути. Длина гладкого пути.}
+
+\hindex{curve}{Кривая}
+\begin{defn}
+    Множество в $\mathbb{R}^n$ называют \htarg{curve}{кривой}, если оно является образом некоторой непрерывной функции $f: (a,b)\to \mathbb{R}^n$.
+    Дуга кривой (или же путь) - подмножество кривой $f: [c,d] \to \mathbb{R}^n$.
+\end{defn}
+
+\hindex{lenc}{Длина кривой (пути)}
+\begin{defn}
+    \htarg{lenc}{Длина дуги кривой (пути)} $f: [a,b]\to \mathbb{R}^n$ это $V_f([a,b])$.
+\end{defn}
+
+\begin{remark}
+    Если длина пути конечна, то путь называется спрямляемым, иначе - неспрямляемым.
+\end{remark}
+
+\begin{defn}
+    Естественная параметризация кривой - параметризация длиной её дуги, отсчитываемой от фиксированной точки.
+\end{defn}
+
+\begin{remark}
+    Естественная параметризация - параметризация, которая "равномерна по времени, т.е. за одинаковый промежуток времени проходим одинаковое расстояние".
+\end{remark}
+
+\subsection*{Естественная параметризация спрямляемого пути}
+
+$\phi:[a,b]\to[0,\beta], \phi(x)=V_f([a,x])$, если $\phi$ строго возрастает (путь $"$без остановок$"$, $f\not\equiv const$ ни на каком интервале),
+то $\phi$ - биекция и \\
+$\exists \psi: [0,\beta]\to[a,b], \psi=\phi^{-1}, V_f([a,b])=\phi(b)-\phi(a)$\\
+$V_{f\circ \psi}([c,d])=V_f([\psi(c),\psi(d)]) = \phi(\psi(d))-\phi(\psi(c))=d-c$
+
+\begin{defn}
+    \add{smoothc}{Гладкий путь} - образ гладкой $f: [a,b] \to \mathbb{R}^n$.
+\end{defn}
+
+\begin{remind}
+    \htarg{lagrange}{Формула Лагранжа}, $f: [a,b] \to \mathbb{R}$ дифференцируема $\Rightarrow \exists \xi \in (a,b):$
+    $$f'(\xi) = \frac{f(a)-f(b)}{a-b}$$
+\end{remind}
+
+\begin{stat}
+    \add{lensmoothc}{Длина гладкого пути} 
+    $f=(f_1, ..., f_n)$ равна $\displaystyle \int_{a}^{b}{\sqrt{\sum\limits_{m=1}^{n}(f'_m(x))^2}} dx$
+\end{stat}
+
+\begin{proof}
+    Рассмотрим $V_f([a,b]) = \displaystyle \sup_{x_0=a, ..., x_N = b} \sum\limits_{k=0}^{N-1} |f(x_{k+1})-f(x)|$ и 
+    воспользуемся формулой Лагранжа $\sum\limits_{k=0}^{N-1} \sqrt{\sum\limits_{m=1}^{n}(f_m(x_{k+1})-f_m(x_k))^2} = \\$
+    $\sum\limits_{k=0}^{N-1} (x_{k+1}-x_k) \sqrt{\sum\limits_{m=1}^{n} (f'_m(\xi_{m,k}))^2}=(V),$
+    $\ \xi_{m,k} \in (x_k,x_{k+1}), (f'_m)^2$ равномерно непрерывна на $[x_k, x_{k+1}]$, значит для любого $\varepsilon > 0$ 
+    существует достаточно малое разбиение $[a,b]$ такое, что 
+    $(f'_m)^2(\xi_{m,k}) \leq \min_{[x_k, x_{k+1}]} (f'_m)^2 + \varepsilon^2$ . Тогда
+    \[  (I) \leq (V) \leq \underbrace{\sum\limits_{k=0}^{N-1} (x_{k+1}-x_k) \sqrt{\sum\limits_{m=1}^{n} \min_{[x_k, x_{k+1}]} (f'_m)^2}}_{(I)} 
+    +  \varepsilon \sqrt{n} \cdot \underbrace{(b-a)}_{\sum\limits_{k=0}^{N-1} (x_{k+1}-x_k)} \]
+    Левая и правая части стремятся к интегралу из условия (при стремлении 
+    мелкости к нулю), тогда по \href{https://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D0%BE%D1%80%D0%B5%D0%BC%D0%B0_%D0%BE_%D0%B4%D0%B2%D1%83%D1%85_%D0%BC%D0%B8%D0%BB%D0%B8%D1%86%D0%B8%D0%BE%D0%BD%D0%B5%D1%80%D0%B0%D1%85}
+    {теореме о двух миллиционерах} туда же стремится и $(V)$.
+\end{proof}
+
+\subsection*{Естественная параметризация гладкого пути}
+
+$\displaystyle \phi(x)=V_f([a,x])=\int_{a}^{x} |f'(t)| dt = \int_{a}^{x}{\sqrt{\sum\limits_{k=1}^{n}(f'_k(t))^2}} dt$\\
+Параметризация всё также по длине дуги $\psi = \phi^{-1}$
+\begin{stat}
+    $|(f(\psi(x)))'|=1$
+\end{stat}
+
+\begin{proof}
+    $\phi'(x)=|f'(x)|, \psi'(x)=\frac{1}{\phi'(\psi(x))}=\frac{1}{|f'(\psi(x))|}$\\
+    $|(f(\psi(x)))'|=|f'(\psi(x))\cdot\psi'(x)|=1$
+\end{proof}
+
+
+\section{Движение по окружности. Единственность простого вращения.}
+
+
+Единичная окружность описывается уравнением $x^2+y^2=1$.
+Хотим обойти её с единичной скоростью, начиная с точки (1,0).
+
+Комплексные обозначения: рассмотрим биекцию $\mathbb{R}^2$ с $\mathbb{C}$ по правилу:
+$(x,y) \leftrightarrow (x+iy)$. Тогда путь можно рассматривать как отображение из $\mathbb{R}$ в $\mathbb{C}$.
+
+\begin{defn}
+    \add{simple rotatiom}{Простое вращение}
+    по окружности это отображение \\
+    $\Gamma: \mathbb{R} \to \pi=\{ z\in \mathbb{C} \big| |z| = 1 \} = \{ z\in \mathbb{C} \big| x,y\in \mathbb{R}, x^2+y^2=1, z=x+iy \}$,
+    \begin{itemize}
+        \item $\Gamma \in C^1$ (гладкая)
+        \item $\Gamma(0)=1, \Gamma'(0)=i$
+        \item $|\Gamma'(t)|=1$ для любого $t$
+    \end{itemize}
+\end{defn}
+
+\begin{lemma}
+    $\Gamma'(t)\equiv i\Gamma(t)$
+\end{lemma}
+
+\begin{proof}
+    $\Gamma(t)\in\pi \Rightarrow |\Gamma(t)|=\Gamma(t)\overline{\Gamma(t)} = 1$\\
+    $\Rightarrow (\Gamma(t)\overline{\Gamma(t)})' = \Gamma'(t)\overline{\Gamma(t)}+\Gamma(t)\overline{\Gamma'(t)} = 0$\\
+    $\Rightarrow 2\Re(\Gamma'(t)\overline{\Gamma(t)})= 0,$
+    $|\Gamma'(t)|=|\overline{\Gamma(t)}|=1$ и $\Gamma'(0)\overline{\Gamma(0)}=i$
+    $\Rightarrow \Gamma'(t)\overline{\Gamma(t)} \equiv i$
+\end{proof}
+
+\begin{stat}
+    Если $\Gamma$ существует, то оно единственно.
+\end{stat}
+
+\begin{proof}
+    Пусть $\Gamma_1, \Gamma_2$ - простые вращения, тогда по лемме\\
+    $(\Gamma_1 \overline{\Gamma_2})'=\Gamma_1' \overline{\Gamma_2}+\Gamma_1 \overline{\Gamma_2'}$
+    $= i \Gamma_1 \overline{\Gamma_2} + \Gamma_1 \overline{i\Gamma_2} = 0$
+    $\Rightarrow \Gamma_1 \overline{\Gamma_2} = const, \Gamma_1(0) \overline{\Gamma_2(0)}=1$\\
+    $\displaystyle \Rightarrow \Gamma_1 \overline{\Gamma_2} = 1 \Rightarrow \Gamma_1 = \frac{1}{\overline{\Gamma_2}} = \frac{\Gamma_2}{|\Gamma_2|} = \Gamma_2$
+\end{proof}
+
+
+\section{Построения простого вращения. Тригонометрические функции. Свойства. Формула Эйлера.}
+
+
+\begin{stat}
+    $\Gamma(t)$ существует. (см. прошлый билет)
+\end{stat}
+
+\begin{proof}
+    $\pi=\{  z=x+iy \big| x,y\in \mathbb{R}, x^2+y^2=1 \}$\\
+    $-1 \leq t \leq 1: x = t, \ y = \sqrt{1-t^2}$\\
+    $1 \leq t \leq 3: \ x = 2-t, \ y = -\sqrt{1-(2-t)^2}$\\
+    Покажем, что после естественной параметризации есть гладкость и `на краях`,
+    $f_1'(t)=1, f_2'(t)=-\frac{t}{\sqrt{1-t^2}}$\\
+    $\phi (x) = \int_{-1}^x |f'(t)| dt = \int_{-1}^x \sqrt{1+\frac{t^2}{1-t^2}} dt = \int_{-1}^{x} 
+    \frac{1}{\sqrt{1-t^2}} dt$ этот интеграл сходится, т.к. особенность порядка $\frac{1}{2}$.
+    \textit{Пояснение:} из первого семестра мы знаем, что 
+    $\int_{0}^{1} \frac{dt}{t^\alpha} $ сходится $\Leftrightarrow  \alpha < 1$, а в данном случае 
+    достаточно рассмотреть $\int_0^1 \frac{dt}{\sqrt{1-t^2}} = \int_0^1 \frac{dt}{\sqrt{1-t}\sqrt{1+t}} $,
+    он сходится, т.к. $\int_0^1 \frac{dt}{\sqrt{1-t}} = \int_0^1 \frac{dt}{\sqrt{t}}$ сходится и можно, например,
+    применить признак Абеля, чтобы домножить аргумент на $\frac{1}{\sqrt{1+t}}$.
+\end{proof}
+
+
+\section{Дифференцируемость отображений между евклидовыми пространствами. Свойства. Примеры.}
+
+\begin{defn}
+    \add{norma}{Норма} на евклидовых пространствах - отображение из $\mathbb{R}^n$ в $\mathbb{R}_+$, удовлетворяющее условиям:
+    \begin{enumerate}
+        \item $||x||=0 \Leftrightarrow x=0$
+        \item $||\alpha x|| = |\alpha| \cdot ||x||, \forall \alpha \in \mathbb{R}$
+        \item $||x+y|| \leq ||x|| + ||y||$
+    \end{enumerate} 
+\end{defn}
+
+\begin{remark}
+    Все расстояния мы будем рассматривать с евклидовой нормой
+    (т.е. $d(x,y)=||x-y||=\sqrt{\sum\limits_{k=1}^{n}(x_k-y_k)^2}$).
+    Такая метрика стандартна. Так как в этом семестре рассматриваемые размерности 
+    евлидовых пространств конечные, то с точки зрения сходимостей к нулю мы можем считать 
+    разные нормы эквивалентными.
+\end{remark}
+
+\begin{remind}
+    \htarg{modv}{Модуль (или длина) евклидова вектора} $x=(x_1,x_2, ... , x_n)$:
+    \[
+        |x|=\sqrt{\sum\limits_{k=1}^{n}x_k^2}
+    \]
+\end{remind}
+
+\hindex{dif}{Дифференциал}
+\hindex{der}{Производная}
+\begin{defn}
+    $f: \mathbb{R}^n \to \mathbb{R}^m$ дифференцируема в точке $a$, если
+    существует линейное отображение $L$, такое что $f(x)=f(a)+L(x-a)+o(||x-a||)$,
+    $L$ называют \htarg{der}{дифференциалом} функции $f$ в точке $a$.
+    $L$ определяется матрицей $A$ размера $m \times n$, её столбцы -
+    это значения на базисных векторах, $A$ называют \htarg{der}{производной} функции.
+\end{defn}
+
+\begin{remark}
+    Запись $f(x)=f(a)+L(x-a)+o(||x-a||)$ означает, что
+    \[ \forall \varepsilon > 0 \ \exists \delta: \ \ 0 < ||x-a|| < \delta \Rightarrow \frac{|f(x)-f(a)-L(x-a)|}{||x-a||} < \varepsilon \]
+\end{remark}
+
+\begin{remark}
+    Если $L$ существует, то оно единственно.
+    \begin{proof}
+        Пусть $L_1$ и $L_2$ дифференциалы $f$ в точке $a$, тогда \\
+        $(L_1-L_2)(x-a)=o(||x-a||)$ при $x\to a$, это возможно только
+        если отображение $(L_1-L_2)$ тождественный нуль.\\
+        \textit{Пояснение: } пусть $L(x)=o(||x||), x=(x_1,...,x_n)$; $L(x)=\sum\limits_{k=1}^{n} L(x_k e_k) =
+        \sum\limits_{k=1}^{n} x_k L(e_k)$, где $e_k$ - базисные вектора. 
+        Пусть $\exists k: L(e_k)\not=0 \Rightarrow $ для векторов вида $y=a e_k, a\in\mathbb{R}_{>0}, a \to 0$,
+        $\frac{L(y)}{||y||}=\frac{aL(e_k)}{a||e_k||}=\frac{L(e_k)}{||e_k||} \not=0 $, противоречие. 
+    \end{proof}
+\end{remark}
+
+\section{Отделимость линейных отображений от нуля. Норма в пространстве линейных отображений.}
+
+
+\section{Дифференцирование суммы, произведения, частного.}
+
+
+\section{Дифференцирование суперпозиции функций.}
+
+
+\section{Частные производные. Связь частных производных с дифференцируемостью. Производная по направлению.}
+
+
+\hindex{partder}{Частная производная}
+\begin{defn}
+    \htarg{partder}{Частной производной}
+    функции $f$ по $i$-ой координате в точке $A=(a_1, a_2, ..., a_n)$ называют предел:
+    $$f'_{x_i}(A) = \frac{\delta f}{\delta x_i} (A) = \lim\limits_{x_i \to a_i} \frac{f(a_1, ..., a_{i-1}, x_i, a_{i+1}, ..., a_n) - f(a_1, ..., a_{i-1}, a_i, a_{i+1}, ..., a_n)}{x_i-a_i}$$
+\end{defn}
+
+\begin{remind}
+    Неравенство Коши-Буняковского-Шварца (КБШ):
+    $$
+        \left(\sum\limits_{k=1}^{n}x_k y_k\right)^2 \leq
+        \left(\sum\limits_{k=1}^{n}x_k^2\right)
+        \left(\sum\limits_{k=1}^{n}y_k^2\right)
+    $$
+\end{remind}
+
+\begin{theorem}
+    Если все частные производные $f: \mathbb{R}^n \to \mathbb{R}^m$ непрерывны в некоторой окрестности точки $x^0$, то $f$ дифференцируема в $x^0$.
+\end{theorem}
+
+\begin{proof}
+    Рассмотрим случай $m=1$.
+    $x^0 = (x_1^0,...,x_n^0)$.
+    Применим \hlink{lagrange}{формулу Лагранжа} $f(x)-f(x^0)=f(x_1,...,x_n)-f(x_1^0,...,x_n^0)=$\\
+    $\sum\limits_{k=1}^{n} \left(f(x_1^0,...,x_{k-1}^0,x_k,x_{k+1}...,x_n)-f(x_1^0,...,x_{k-1}^0,x_k^0,x_{k+1}...,x_n)\right)=$\\
+    $\sum\limits_{k=1}^{n} f'_{x_k}\big|_{(x_1^0,...,x_{k-1}^0,\xi_k,x_{k+1},...,x_n)} (x_k-x_k^0)\overbrace{=}^? \sum\limits_{k=1}^{n} f'_{x_k}\big|_{x^0}(x_k-x_k^0) + o(|x-x^0|)$\\
+    $\Leftrightarrow\sum\limits_{k=1}^{n} (f'_{x_k}\big|_{t_k} - f'_{x_k}\big|_{x^0}) (x_k-x_k^0)\overbrace{=}^? o(|x-x^0|)$, |LHS| оценивается по неравенству КБШ как
+    $\sqrt{\sum\limits_{k=1}^{n} \left(f'_{x_k}\big|_{t_k} - f'_{x_k}\big|_{x^0}\right)^2} \cdot \sqrt{\sum\limits_{k=1}^{n} \left(x_k-x_k^0\right)^2} < \varepsilon \sqrt{n} \hyperlink{modv}{|x-x^0|}$
+    при $|x-x_0| < \delta$ (пользуемся непрерывностью $f'_{x_k}$ в окрестности точки $x_0$ и тем, что $|t_k-x_0| < |x-x_0|$). Для $m>1$ достаточно представить $f$ в виде $f=(f_1,...,f_m)$ и рассмотреть каждую $f_k$ отдельно.
+\end{proof}
+
+\begin{remark}
+    Обратная теорема неверна.
+\end{remark}
+
+\begin{defn}
+    \hindex{dirder}{Производная по направлению}
+    \htarg{dirder}{Производной функции $f$ по направлению} единичного вектора $e$ в точке $x$ называется предел:
+    \[
+        \lim\limits_{
+            \begin{smallmatrix}
+                t\in \mathbb{R} \\
+                t \to 0
+            \end{smallmatrix}
+        }
+        \frac{f(x+te)-f(x)}{t}
+    \]
+\end{defn}
+
+\begin{remark}
+    Частная производная $f$ по $k$-ой координате это
+    производная по направлению $(\underbrace{0,...,0}_{k-1}, 1, 0, ..., 0)$.
+\end{remark}
+
+\begin{remark}
+    Производная $f(x_1,x_2,...,x_n)$ по направлению $e=(e_1, e_2, ..., e_n)$ выражается через частные производные $f$.
+    \[
+        f'_e(x)=\sum\limits_{k=1}^{n} e_k f'_{x_k}(x)
+    \]
+\end{remark}
+
+
+\section{Лемма о билипшицевости.}
+
+
+\section{Теорема об обратном отображении.}
+
+
+\section{Матрица Якоби. Градиент.}
+
+
+\begin{defn}
+    \add{grad}{Градиент} это вектор, состоящий из частных производных $f: \mathbb{R}^n \to \mathbb{R}$
+    \[
+        \nabla f = \textrm{grad } f =
+        \left(\frac{\delta f}{\delta x_1}, \frac{\delta f}{\delta x_2}, ... , \frac{\delta f}{\delta x_n} \right)
+    \]
+\end{defn}
+
+\begin{remark} Свойства
+    \begin{itemize}
+        \item Градиент указывает направление вектора, вдоль которого функция имеет наибольшее возрастание
+        \item $df = \sum\limits_{k}^{} \frac{\delta f}{\delta x_k} dx_k = \langle \textrm{grad } f, dx \rangle$
+    \end{itemize}
+\end{remark}
+
+\begin{defn}
+    \add{jacobi}{Матрица Якоби} - матрица состоящая из всех частных производных
+    $f: \mathbb{R}^n \to \mathbb{R}^m, f=(f_1, f_2, ... , f_m)$
+    \[
+        J(x) =
+        \begin{pmatrix}
+            \frac{\delta f_1}{\delta x_1}(x) & \frac{\delta f_1}{\delta x_2}(x) & \dots  & \frac{\delta f_1}{\delta x_n}(x) \\
+            \frac{\delta f_2}{\delta x_1}(x) & \frac{\delta f_2}{\delta x_2}(x) & \dots  & \frac{\delta f_2}{\delta x_n}(x) \\
+            \vdots                           & \vdots                           & \ddots & \vdots                           \\
+            \frac{\delta f_m}{\delta x_1}(x) & \frac{\delta f_m}{\delta x_2}(x) & \dots  & \frac{\delta f_m}{\delta x_n}(x) \\
+        \end{pmatrix}
+    \]
+\end{defn}
+
+\begin{remark} Свойства
+    \begin{itemize}
+        \item Строчки матрицы Якоби - градиенты соответствующих функций
+        \item Если все $f_k$ непрерывно дифференцируемы в окрестности $a$, то матрица Якоби - производная $f$ в $a$,
+              т.е. $f(x)=f(a)+J(a)(x-a)+o(|x-a|)$
+        \item (Свойство функториальности) Если
+              $\varphi: \mathbb{R}^n \to \mathbb{R}^m, \psi: \mathbb{R}^m \to \mathbb{R}^k$
+              дифференцируемы, то $J_{\psi \circ \varphi}(x) = J_\psi(\varphi(x))J_\varphi(x)$
+    \end{itemize}
+\end{remark}
+
+
+\section{Дифференцирование обратного отображения.}
+
+
+\section{Теорема о равенстве смешанных производных.}
+\begin{defn}
+    \add{mixdir}{Смешанная производная} порядка $k$ определяется индуктивно:\\
+    \textit{База} $k=1$: обыкновенная \hyperlink{partial der}{частная производная} $\frac{\delta f}{\delta x_{i_1}}$\\
+    \textit{Переход} $k\to k+1$: возьмём частную производную по $i_{k+1}$-ой координате в точке $A$ от частной производной порядка $k$, т.е.
+    от $\frac{\delta^k f}{\delta x_{i_k}\delta x_{i_{k-1}}...\delta x_{i_1}}$ (должна быть определена в некоторой окрестности
+    $A$), если соответствующий предел существует, то его и назовём смешанной частной производной порядка $k+1$, обозначим так:
+    $\frac{\delta^{k+1} f}{\delta x_{i_{k+1}}\delta x_{i_k}...\delta x_{i_1}}$
+\end{defn}
+
+\begin{theorem}
+    Пусть $f: G\subset \mathbb{R}^2 \to \mathbb{R}$ ($G$ открытое), $f=f(x,y)$,
+    смешанные производные $\frac{\delta^2 f}{\delta x \delta y}$,
+    $\frac{\delta^2 f}{\delta y \delta x}$ непрерывны в точке $(x_0,y_0)\in G$ и определены в её окрестности.
+    Тогда $\frac{\delta^2 f}{\delta x \delta y} (x_0,y_0) = \frac{\delta^2 f}{\delta y \delta x} (x_0,y_0)$.
+\end{theorem}
+
+\begin{proof}
+    Воспользуемся \hyperlink{lagrange}{формулой Лагранжа} и вспомогательными функциями.
+    
+    \centering{\includegraphics[scale=.35]{image1.png}}
+
+    \begin{remark}
+        Далее используются обозначения
+        $f''_{xy}:=\frac{\delta^2 f}{\delta y \delta x}$,
+        $f''_{yx}:=\frac{\delta^2 f}{\delta x \delta y}$
+    \end{remark}
+
+    \[\phi(\varepsilon_1, \varepsilon_2) =
+        f(x_0, y_0)+f(x_0+\varepsilon_1, y_0+\varepsilon_2)
+        -f(x_0+\varepsilon_1, y_0)-f(x_0, y_0+\varepsilon_2)\]
+    %
+    \[F_1(x)=f(x,y_0+\varepsilon_2)-f(x,y_0)
+        \Rightarrow \phi = F_1(x_0+\varepsilon_1)-F_1(x_0) = \varepsilon_1 F'_1(\xi_1)\]
+    \[F'_1(\xi_1)=f'_x(\xi _1, y_0+\varepsilon_2)-f'_x(\xi_1,y_0)=
+        \varepsilon_2 f''_{xy}(\xi_1, \xi_2)
+        \Rightarrow \phi = \varepsilon_1 \varepsilon_2 f''_{xy}(\xi_1, \xi_2)\]
+    %
+    \[F_2(y)=f(x_0+\varepsilon_1,y)-f(x_0,y)
+        \Rightarrow \phi = F_2(y_0+\varepsilon_2)-F_2(y_0) = \varepsilon_2 F'_2(\eta_2)\]
+    \[F'_2(\eta_2)=f'_y(x_0+\varepsilon_1,\eta_2)-f'_y(x_0,\eta_2)=
+        \varepsilon_1 f''_{yx}(\eta_1, \eta_2)
+        \Rightarrow \phi = \varepsilon_1 \varepsilon_2 f''_{yx}(\eta_1, \eta_2)\]
+    %
+    \[\phi = \varepsilon_1 \varepsilon_2 f''_{xy}(\xi_1, \xi_2) = \varepsilon_1 \varepsilon_2 f''_{yx}(\eta _1, \eta _2) \]
+    \[\xi_1,\eta_1 \in [x_0, x_0+\varepsilon_1], \xi_2,\eta_2 \in [y_0, y_0+\varepsilon_2]\]
+    %
+    При $(\varepsilon_1, \varepsilon_2) \to 0:$
+    $\frac{\phi}{\varepsilon_1 \varepsilon_2} \to f''_{xy}(x_0, y_0) = f''_{yx}(x_0, y_0)$
+\end{proof}
+
+\begin{cons}
+    Если частные производные $\frac{\delta^2 f}{\delta x_i \delta x_j}$ и $\frac{\delta^2 f}{\delta x_j \delta x_i}$ непрерывны в точке и определены в её окрестности, то и равны в ней.
+\end{cons}
+
+
+\section{Формула Тейлора с остатком в форме Пеано.}
+
+
+$x\in \mathbb{R}^n$ - центр разложения в ряд Тейлора, $y\in \mathbb{R}^n, h=y-x$.\\
+$[x,y]$ - отрезок, его можно параметризовать так: $x+t(y-x)=x+th, t\in [0,1]$.\\
+$\varphi (t) = f(x+th)$\\
+$\varphi' (t) = \langle \textrm{grad } f, h \rangle = \sum\limits_{k=1}^{n} \frac{\delta f}{\delta x_k} (x+th) h_k $\\
+...\\
+$\varphi^{(s)} (t) = \sum\limits_{1 \leq k_1,...,k_s \leq n}^{} \frac{\delta^s f}{\delta x_{k_1} ... \delta x_{k_s}} (x+th) h_{k_1}...h_{k_s} = \left(\left(\sum\limits_{k=1}^{n} \frac{\delta}{\delta x_k} h_k\right)^s f\right) (x+th)$\\
+(последнее равенство следует воспринимать как удобное обозначение)\\
+\[f(y)=\sum\limits_{s=0}^{m} \frac{\varphi^s(0)}{s!} + o(|h|^m)\]
+\begin{stat}
+    \add{taylor}{Формула Тейлора} с остатком в форме Пеано
+    \[
+        f(y) = \sum\limits_{s=0}^{m} \left(\left(\sum\limits_{k=1}^{n} \frac{\delta}{\delta x_k} h_k\right)^s \frac{f}{s!} \right) (x) + o(|h|^m)
+    \]
+\end{stat}
+
+
+\section{Формула Тейлора с остатком в интегральной форме.}
+
+
+\begin{stat}
+    Формула Тейлора с остатком в интегральной форме
+    \[
+        f(y) = \sum\limits_{s=0}^{m} \left(\left(\sum\limits_{k=1}^{n} \frac{\delta}{\delta x_k} h_k\right)^s \frac{f}{s!} \right) (x) + \int_{0}^{1} \frac{(-1)^{m+1}(x+th)}{m!}(1-t)^m dt
+    \]
+\end{stat}
+
+
+\section{Необходимое условие экстремума функции многих переменных.}
+
+
+\begin{theorem}(\add{necextr}{Необходимое условие экстремума})
+    $f: G\subset \mathbb{R}^n \to \mathbb{R}$ ($G$ открытое) гладкая, $x^0$ - точка локального минимума или максимума.
+    Тогда $\textrm{grad } f\big|_{x^0} = 0$
+\end{theorem}
+
+\begin{proof}
+    $\textrm{grad } f = \left(\frac{\delta f}{\delta x_1}, \frac{\delta f}{\delta x_2}, ... , \frac{\delta f}{\delta x_n} \right)$\\
+    Пусть $\frac{\delta f}{\delta x_k}\big|_{x^0} \not= 0$, тогда
+    $f(x^0_1, ..., x^0_{k-1}, x_k, x^0_{k+1}, ... , x^0_n) - f(x^0_1, ... ,x^0_n) = $\\
+    $\underbrace{\frac{\delta f}{\delta x_k}\big|_{x^0}}_{\not=0}(x_k-x^0_k) +o(|x_k-x^0_k|)$
+    $\Rightarrow \rightarrow\leftarrow$ (свелось к одномерному случаю)
+\end{proof}
+
+
+\section{Знак квадратичной формы. Достаточные условия экстремума функции многих переменных.}
+
+\begin{defn}
+    \add{sqform}{Квадратичная форма} $Q(x), x=(x_1, ..., x_n)$ - 
+    это выражение вида $\sum\limits_{1 \leq k,l \leq n} a_{k,l} x_k x_l$, где $a_{k,l}$ - скаляр.  
+\end{defn}
+
+\begin{defn}
+    (\add{signform}{Знак квадратичной формы})
+    Квадратичная форма $Q(x), x\in \mathbb{R}^n, a_{k,l} \in \mathbb{R}$ положительно (отрицательно) определена, если для всех ненулевых $x: Q(x)>0 (Q(x)<0)$
+    и знакопеременна, если может принимать как положительные, так и отрицательные значения.
+\end{defn}
+
+\begin{theorem}(\add{suffextr}{Достаточное условие экстремума})
+    Пусть у $f: \mathbb{R}^n \to \mathbb{R}$ в точке $x^0$ нулевой градиент и определены все смешанные производные второго порядка.
+    Тогда если квадратичная форма
+    $Q(h)=\sum\limits_{1 \leq k,l \leq n} \frac{\delta^2 f}{\delta x_k \delta x_l}(x^0) h_k h_l$:
+    \begin{enumerate}
+        \item положительно определена, значит $x^0$ точка локального минимума.
+        \item отрицательно определена, значит $x^0$ точка локального максимума.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    На замкнутом шаре квадратичная форма достигает своего минимума и максимума, а по формуле Тейлора остаток маленький:
+    \[
+        f(x) = f(x^0) + \frac{1}{2} \sum\limits_{1 \leq k,l \leq n} \frac{\delta^2 f}{\delta x_k \delta x_l} (x^0) h_k h_l + o(|h|^2); \ h=x-x^0
+    \]
+\end{proof}
+
+\begin{remark}
+    Квадратичную форму можно привести к симметричному виду $\sum a_{k,l} h_k h_l$,  $a_{k,l}=a_{l,k}$,
+    значит её можно привести и к диагольному виду $Q(h) = \sum_{k=1}^n \lambda_k h_k^2$ \\
+    \begin{itemize}
+        \item $Q(h)$ положительна $\Leftrightarrow$ все $\lambda_k > 0$ ($x^0$ т. мин.)
+        \item $Q(h)$ отрицательна $\Leftrightarrow$ все $\lambda_k < 0$ ($x^0$ т. макс.)
+        \item $Q(h)$ знакопеременна $\Leftrightarrow$ $\exists k,l: \lambda_k < 0 < \lambda_k$ ($x^0$ не т. экстр.)
+        \item иначе требуется дополнительное исследование
+    \end{itemize}
+\end{remark}
+
+\begin{stat}
+    \add{silvester}{Критерий Сильвестра} для симметричной квадратичной формы:
+    \begin{enumerate}
+        \item для положительной определённости квадратичной формы необходимо и достаточно, чтобы \href{https://ru.wikipedia.org/wiki/%D0%9C%D0%B8%D0%BD%D0%BE%D1%80_(%D0%BB%D0%B8%D0%BD%D0%B5%D0%B9%D0%BD%D0%B0%D1%8F_%D0%B0%D0%BB%D0%B3%D0%B5%D0%B1%D1%80%D0%B0)}
+        {угловые миноры} её матрицы были положительны.
+        \item Для отрицательной определённости квадратичной формы необходимо и достаточно, чтобы \href{https://ru.wikipedia.org/wiki/%D0%9C%D0%B8%D0%BD%D0%BE%D1%80_(%D0%BB%D0%B8%D0%BD%D0%B5%D0%B9%D0%BD%D0%B0%D1%8F_%D0%B0%D0%BB%D0%B3%D0%B5%D0%B1%D1%80%D0%B0)}
+        {угловые миноры} чётного порядка её матрицы были положительны, а нечётного порядка — отрицательны.
+    \end{enumerate}
+\end{stat}
+\section{Лемма о билипшицевости.}
+\section{Лемма о билипшицевости.}
+\section{Лемма о билипшицевости.}
+
+
+\newpage
+\hypertarget{t2}{}
+\printindex
+
+
+\end{document}
