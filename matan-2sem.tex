@@ -574,10 +574,10 @@ $\varphi' (t) = \langle \textrm{grad } f, h \rangle = \sum\limits_{k=1}^{n} \fra
 $\varphi^{(s)} (t) = \sum\limits_{1 \leq k_1,...,k_s \leq n}^{} \frac{\delta^s f}{\delta x_{k_1} ... \delta x_{k_s}} (x+th) h_{k_1}...h_{k_s} = \left(\left(\sum\limits_{k=1}^{n} \frac{\delta}{\delta x_k} h_k\right)^s f\right) (x+th)$\\
 (последнее равенство следует воспринимать как удобное обозначение)
 \[\varphi(\tau)=\sum\limits_{s=0}^{m} \frac{\varphi^s(0)}{s!}\tau^s + \underbrace{\frac{\varphi^{(m+1)}(\xi)}{(m+1)!}\tau^{(m+1)}}_{R_m(\tau,\varphi)}, \ \  \xi \in [0, \tau] \]
-\[R_m(\tau,\varphi) = \int_{0}^{\tau} \frac{\varphi^{(m+1)}(t)}{m!}(\tau^{m}-t)^m dt = \int_{0}^{1} \frac{\varphi^{(m+1)}(t\tau)}{m!} \tau^{m+1} (1-t)^m dt \]
-
+\[R_m(\tau,\varphi) = \int_{0}^{\tau} \frac{\varphi^{(m+1)}(l)}{m!}(\tau^{m}-l)^m dl = \int_{0}^{1} \frac{\varphi^{(m+1)}(l\tau)}{m!} \tau^{m+1} (1-l)^m dl \]
+Подставим $\tau=1, t=0$, получим
 \begin{stat}
-    \add{taylor}{Формула Тейлора} с остатком в форме Пеано (подставили $\tau=1, t=0$)
+    \add{taylor}{Формула Тейлора} с остатком в форме Пеано, $h=y-x$
     \[
         f(y) = \sum\limits_{s=0}^{m} \left(\left(\sum\limits_{k=1}^{n} \frac{\delta}{\delta x_k} h_k\right)^s \frac{f}{s!} \right) (x) + o(|h|^m)
     \]
@@ -588,9 +588,9 @@ $\varphi^{(s)} (t) = \sum\limits_{1 \leq k_1,...,k_s \leq n}^{} \frac{\delta^s f
 
 
 \begin{stat}
-    Формула Тейлора с остатком в интегральной форме (см. прошлый билет)
+    Формула Тейлора с остатком в интегральной форме (см. прошлый билет), $h=y-x$
     \[
-        f(y) = \sum\limits_{s=0}^{m} \left(\left(\sum\limits_{k=1}^{n} \frac{\delta}{\delta x_k} h_k\right)^s \frac{f}{s!} \right) (x) + \int_{0}^{1} \frac{(-1)^{m+1}(x+th)}{m!}(1-t)^m dt
+        f(y) = \sum\limits_{s=0}^{m} \left(\left(\sum\limits_{k=1}^{n} \frac{\delta}{\delta x_k} h_k\right)^s \frac{f}{s!} \right) (x) + \int_{0}^{1} \frac{(1-l)^m}{m!} \left(\left(\sum\limits_{k=1}^{n} \frac{\delta}{\delta x_k} h_k\right)^{m+1} f \right) (x+lh) dl
     \]
 \end{stat}
 
@@ -611,14 +611,14 @@ $\varphi^{(s)} (t) = \sum\limits_{1 \leq k_1,...,k_s \leq n}^{} \frac{\delta^s f
     $\Rightarrow \rightarrow\leftarrow$ (свелось к одномерному случаю)
     \begin{remind}
         Одномерный случай, $g: \mathbb{R} \to \mathbb{R}$ \\
-        $g(x)=g(x_0)+g'(x_0)+o(|x-x_0|)$
+        $g(x)=g(x^0)+g'(x^0)(x-x^0)+o(|x-x^0|)$
         \begin{enumerate}
-            \item $g'(x_0)>0$, тогда при достаточно малом 
-            $|x-x_0|: \ 0 < g'(x_0)-\epsilon< \frac{g(x)-g(x_0)}{x-x_0} < g'(x_0)+\epsilon$,
-            в таких окрестностях $g(x)>g(x_0)$ при $x>x_0$, $g(x)<g(x_0)$ при $x<x_0$, значит $x_0$ - не экстремум.
-            \item $g'(x_0)<0$, тогда при достаточно малом 
-            $|x-x_0|: \ g'(x_0)-\epsilon< \frac{g(x)-g(x_0)}{x-x_0} < g'(x_0)+\epsilon < 0$,
-            в таких окрестностях $g(x)<g(x_0)$ при $x>x_0$, $g(x)>g(x_0)$ при $x<x_0$, значит $x_0$ - не экстремум.
+            \item $g'(x^0)>0$, тогда при достаточно малом 
+            $|x-x^0|: \\ 0 < g'(x^0)-\varepsilon< \frac{g(x)-g(x^0)}{x-x^0} < g'(x^0)+\varepsilon$,
+            в таких окрестностях $g(x)>g(x^0)$ при $x>x^0$, $g(x)<g(x^0)$ при $x<x^0$, значит $x^0$ - не экстремум.
+            \item $g'(x^0)<0$, тогда при достаточно малом 
+            $|x-x^0|: \\ g'(x^0)-\varepsilon< \frac{g(x)-g(x^0)}{x-x^0} < g'(x^0)+\varepsilon < 0$,
+            в таких окрестностях $g(x)<g(x^0)$ при $x>x^0$, $g(x)>g(x^0)$ при $x<x^0$, значит $x^0$ - не экстремум.
         \end{enumerate}
     \end{remind}
 \end{proof}
@@ -640,7 +640,7 @@ $\varphi^{(s)} (t) = \sum\limits_{1 \leq k_1,...,k_s \leq n}^{} \frac{\delta^s f
 \begin{theorem}(\add{suffextr}{Достаточное условие экстремума})
     Пусть у $f: \mathbb{R}^n \to \mathbb{R}$ в точке $x^0$ нулевой градиент и определены все смешанные производные второго порядка.
     Тогда если квадратичная форма
-    $Q(h)=\sum\limits_{1 \leq k,l \leq n} \frac{\delta^2 f}{\delta x_k \delta x_l}(x^0) h_k h_l$:
+    $Q(h)=\sum\limits_{1 \leq k,l \leq n} \frac{\delta^2 f}{\delta x_k \delta x_l}(x^0) h_k h_l$
     \begin{enumerate}
         \item положительно определена, значит $x^0$ точка локального минимума.
         \item отрицательно определена, значит $x^0$ точка локального максимума.
@@ -648,18 +648,27 @@ $\varphi^{(s)} (t) = \sum\limits_{1 \leq k_1,...,k_s \leq n}^{} \frac{\delta^s f
 \end{theorem}
 
 \begin{proof}
-    На замкнутом шаре квадратичная форма достигает своего минимума и максимума, а по формуле Тейлора остаток маленький:
+    Докажем для полож. квадр. формы, \hlink{taylor}{формула Тейлора}
     \[
-        f(x) = f(x^0) + \frac{1}{2} \sum\limits_{1 \leq k,l \leq n} \frac{\delta^2 f}{\delta x_k \delta x_l} (x^0) (x_k-x_k^0) (x_l-x_l^0) + o(|x-x_0|^2)
+        f(x) = f(x^0) + \frac{1}{2} \sum\limits_{1 \leq k,l \leq n} \frac{\delta^2 f}{\delta x_k \delta x_l} (x^0) (x_k-x_k^0) (x_l-x_l^0) + o(||x-x_0||^2)
     \]
-\end{proof}
+    Обозначим $a_{k,l} = \frac{1}{2} \frac{\delta^2 f}{\delta x_k \delta x_l} (x^0)$\\
+    При $x\not=x^0$ сумма $\sum\limits_{1 < k,l\leq n} a_{k,l} (x_k-x_k^0) (x_l-x_l^0) = \langle A(x-x^0), (x-x^0) \rangle > 0$
+    $\Rightarrow \exists \varepsilon>0: \ \langle A(x-x^0), (x-x^0) \rangle \geq \varepsilon ||x-x^0||^2$
 
-\begin{remark}
-    На лекциях было доказательство через то, что эта сумма представима в виде $\langle A(x-x^0), (x-x^0) \rangle > 0$ (для полож. кв. формы $A$),
-    а мы знаем про отделимость от нуля, т.е. из положительности следует, что $\exists \varepsilon: \ \langle A(x-x^0), (x-x^0) \rangle \geq \varepsilon ||x-x^0||^2$\\
-    \textit{Пояснение: } $\langle Ax,x \rangle > 0, x\not=0 \Rightarrow (Ax,x) \geq \varepsilon$ при $||x||=1$, т.к. функция от x при таких x достигает минимума и максимума,
-    $\Rightarrow (Ax,x) \geq \varepsilon ||x||^2$ (т.к. домножили обе линейные функции на скаляр $||x||$, скалярное произведение линейно).
-\end{remark}
+    \textit{Пояснение: } $\langle Ax,x \rangle > 0, x\not=0$, $A$ - линейное,
+    пусть $g(x)=\langle Ax,x \rangle$\\
+    $\Rightarrow \exists \varepsilon > 0: \ g(x) \geq \varepsilon$ при $||x||=1$ (единичная сфера), 
+    т.к. функция $g(x)$ на единичной сфере (сфера - компакт) достигает минимума и максимума,
+    также легко видеть, что $g(cx)=c^2 g(x)$, где $c$ - скаляр. 
+    Тогда $g(x)=g(||x||e)=||x||^2 g(e) \geq \varepsilon ||x||^2$, т.к. $||e||=1$.
+
+    Поделим равенство
+    \[
+        f(x) - f(x^0) = \langle A(x-x^0), (x-x^0) \rangle + o(||x-x_0||^2)
+    \]
+    на $||x-x^0||^2$, тогда, если $||x-x^0||$ достаточно мало, то правая часть строго положительна.
+\end{proof}
 
 \begin{remark}
     Квадратичную форму можно привести к симметричному виду $\sum a_{k,l} h_k h_l$,  $a_{k,l}=a_{l,k}$,
@@ -720,7 +729,7 @@ $\varphi^{(s)} (t) = \sum\limits_{1 \leq k_1,...,k_s \leq n}^{} \frac{\delta^s f
 \begin{proof}
     Существование: пусть функция $g_x(y) = F(x,y)$, будем считать, что в малой окрестности $V_{(x_0,y_0)}: \ $ 
     $F'_y > 0$, тогда $g(y)$ - возрастающая. Тогда $\forall x \in V \exists ! y: \ F(x,y)=0$. \\
-    Непрерывность: рассмотрите прямоугольник с разрезами (т.е. $g_x(y)$). Так как $F(x,y)=0$ образуют
+    Непрерывность: рассмотрите прямоугольник с разрезами (т.е. $g_x(y)$). Так как решения уравнения $F(x,y)=0$ образуют
     замкнутое множество, то из того, что $x \to a$ и $f(x) \not\to f(a)$, следует, что есть второй корень на линии $x=a$, а у 
     нас корни единственные. \\
     Гладкость: $F(x+h,f(x+h))-F(x,f(x))=F(x+h,f(x)+(f(x+h)-f(x)))-F(x,f(x))=(F)$, при $h\to 0$ можно применять формулу Тейлора 
@@ -732,11 +741,11 @@ $\varphi^{(s)} (t) = \sum\limits_{1 \leq k_1,...,k_s \leq n}^{} \frac{\delta^s f
 
 \begin{theorem}
     $x\in \mathbb{R}^m , y \in \mathbb{R}^n$\\
-    $F: G\to \mathbb{R}^n, G\subset\mathbb{R}^{m+n}$
+    $F: G\subset\mathbb{R}^{m+n}\to \mathbb{R}^n$
     \begin{itemize}
         \item $F\in C^1(G)$
         \item $F(x^0,y^0)=0$
-        \item $F'_y(x^0,y^0)$ обратима (матрица $n\times n$)
+        \item $F'_y(x^0,y^0)$ обратима (матрица $n\times n$ из частных производных)
     \end{itemize}
     тогда в некоторой окрестности $V_{(x^0,y^0)} \subset G$: 
     $$F(x,y) = 0 \Leftrightarrow y=f(x), \ f: V_{(x^0,y^0)} \to \mathbb{R}^n$$
@@ -746,10 +755,10 @@ $\varphi^{(s)} (t) = \sum\limits_{1 \leq k_1,...,k_s \leq n}^{} \frac{\delta^s f
 
 \begin{proof}
     Докажем индукцией по $n$.\\
-    \textit{База: } $n=1 \forall m$ доказано ранее.\\
+    \textit{База: } $n=1 \ \forall m$ доказано ранее (сводится к случаю двух переменных).\\
     \textit{Переход: } $F=(F_1, F_2, ... , F_n), F_k: \mathbb{R}^{m+n} \to \mathbb{R}$.\\
     Имеем $n$ уравнений вида $F_k = 0$.\\ 
-    \textit{Хотим: $y_k=f_n(x_1, x_2, ..., x_m)$, т.е. выразить каждый игрик через иксы.}\\
+    \textit{Хотим: $y_k=f_k(x_1, x_2, ..., x_m)$, т.е. выразить каждый игрик через иксы.}\\
     Матрица невырождена, будем считать, что $\frac{\delta F_n}{\delta y_n} \not= 0$.\\
     Тогда $y_n = f^*(x_1, x_2, ... , x_m, y_1, ... , y_{n-1})$
     по предположению индукции. \\
@@ -786,12 +795,16 @@ $\varphi^{(s)} (t) = \sum\limits_{1 \leq k_1,...,k_s \leq n}^{} \frac{\delta^s f
     \end{pmatrix} 
     =
     \begin{pmatrix}
-        \phi'_y & \vdots \\
-        0 & \df{F_n}{y_n}
-    \end{pmatrix}
+          &   &        &   &   & \df{F_1}{y_n}    \\
+          &   &        &   &   & \df{F_2}{y_n}    \\
+          &   &\phi'_y &   &   & \vdots           \\
+          &   &        &   &   & \df{F_{n-2}}{y_n}\\
+          &   &        &   &   & \df{F_{n-1}}{y_n}\\
+        0 & 0 & \ldots & 0 & 0 & \df{F_n}{y_n}
+    \end{pmatrix} 
     $$
-    откуда $det(\phi'_y) \df{F_n}{y_n} \not= 0$, а значит для системы $\{\phi_k\}_{k\leq n-1}=0$ применимо предположение индукции, т.е. $y_k = f_k(x)$ при $k \leq n-1$.
-    В совокупности получаем $y_n=f^*(x, f_1(x), ... , f_{n-1}(x))=f_n(x)$, что мы и хотели получить. Итоговая функция: $f(x)=(f_1(x), f_2(x), ... , f_n(x))$. Гладкость и искомая производная следуют из того, что мы умеем брать
+    откуда $det(\phi'_y) \df{F_n}{y_n} \not= 0 \Rightarrow det(\phi'_y) \not= 0$, а значит для системы $\{\phi_k\}_{k\leq n-1}=0$ применимо предположение индукции, т.е. $y_k = f_k(x)$ при $k \leq n-1$.
+    Также получаем $y_n=f^*(x, f_1(x), ... , f_{n-1}(x))=f_n(x)$, что мы и хотели получить. Итоговая функция: $f(x)=(f_1(x), f_2(x), ... , f_n(x))$. Гладкость и искомая производная следуют из того, что мы умеем брать
     производную по композиции.  
 \end{proof}
 
@@ -808,6 +821,15 @@ $\varphi^{(s)} (t) = \sum\limits_{1 \leq k_1,...,k_s \leq n}^{} \frac{\delta^s f
 %25
 \section{Функции Лагранжа. Достаточное условие условного экстремума. Примеры.}
 
+\hindex{flagrange}{Функция Лагранжа}
+\begin{defn}
+    Пусть есть $m$ условий вида $F_k(x_1, ... , x_n) = 0$ и мы хотим найти условный 
+    экстремум $F(x_1, ... , x_n)$. Рассмотрим \htarg{flagrange}{функцию Лагранжа} 
+    $L(x_1, ... x_n, \lambda_1, ..., \lambda_m)=F-\sum\limits_{k=1}^{m} \lambda_k F_k$,
+    тогда все частные производные $L$ должны быть нулевыми. 
+\end{defn}
+
+
 %26
 \section{Теорема о перестановке пределов. Общий вид теоремы Стокса-Зайделя.}
 
@@ -823,14 +845,70 @@ $\varphi^{(s)} (t) = \sum\limits_{1 \leq k_1,...,k_s \leq n}^{} \frac{\delta^s f
 %30
 \section{Теорема Стоуна-Вейерштрасса. Лемма об аппроксимации |x|.}
 
+
+\begin{remark}
+    $d(f,g) = \sup|f-g|$
+\end{remark}
+
+\begin{remark}
+    $K$ - компактное множество. $C(K)$ - пространство непрерывных функций на нём.
+\end{remark}
+
+\begin{defn}
+    $\mathcal{A}$ - {algebra}{Алгебра в пространстве непрерывных функций},
+    если $\mathcal{A} \subset C(K)$ и $\mathcal{A}$ - линейное векторное 
+    пространство такое, что $f,g \in \mathcal{A} \Rightarrow fg \in \mathcal{A}$.
+\end{defn}
+
+\hindex{points}{Выделение/разделение точек}
+\begin{defn}
+    $\mathcal{A}$ \htarg{points}{выделяет} точки, если
+    $\forall x \in K \exists f \in \mathcal{A}: \ f(x)\not=0$\\
+    $\mathcal{A}$ \htarg{points}{разделяет} точки, если
+    $\forall x_1, x_2 \in K \exists f \in \mathcal{A}: \ f(x_1)\not=f(x_2)$
+\end{defn}
+
+\begin{theorem}
+    $\mathcal{A}$ - алгебра, $\mathcal{A} \subset C(K)$, $K$ - компактно и хаусдорфово,
+    $\mathcal{A}$ выделяет и разделяет точки. Тогда $\overline{\mathcal{A}}=C(K)$.
+\end{theorem}
+
 %31
 \section{Теорема Стоуна-Вейерштрасса. Завершение докзательства.}
 
 %32
 \section{Теорема о неподвижной точке. Приложение к дифференциальным уравнениям.}
 
+
+\begin{defn}
+    \add{contrmap}{Сжимающее отображение} $T: X \to X$, $X$ - полное метрическое пространство с метрикой $\rho$
+    $$\exists \alpha < 1: \ \rho(Tx, Ty) \leq \alpha \rho (x,y)$$ 
+\end{defn}
+
+\begin{theorem}
+    У сжимающего отображения $T$ есть единственная неподвижная точка, т.е. такая, что $Tx=x$. 
+\end{theorem}
+
+\begin{proof}
+    \textit{Единственность:} пусть $x$ и $y$ - две неподвижные точки отображения $T$, тогда 
+    $\rho (x,y) = \rho (T x, T y) \leq \alpha \rho (x,y)$, откуда $1 \leq \alpha$, противоречие. \\
+    \textit{Существование:} расммотрим орбиту $x$, т.е. $x, Tx, T(Tx)=T^2 x, ... , T^n x, ...$, такая последовательность фундаментальна:
+    $$\forall \varepsilon > 0 \ \exists N \ \forall n,m > N: \ \rho (T^n x, T^m x) < \varepsilon $$
+    действительно, при $n \leq m:$ 
+    $\rho (T^n x, T^m y) \leq \alpha^n \rho (x, T^{m-n} x) \leq $  
+    $\alpha^n \sum\limits_{k=0}^{\infty} \rho (T^k x, T^{k+1} x) \\$ 
+    $\leq \alpha^n \sum\limits_{k=0}^{\infty} \alpha^k \rho (x, Tx) = $
+    $\frac{\alpha^n \rho (x,Tx)}{1-\alpha}  < \varepsilon$. 
+    А значит $\exists \lim\limits_{n \to \infty} T^n x = e \in X$ - неподвижная точка, 
+    т.к. $T^n x \to e \Rightarrow T(T^n x) = T^{n+1} x \to Te = e$ (суть в том, что $Te$ отличается от $T^{n+1}e$ на сколь угодно мало,
+    а значит $Te = \lim\limits_{n+1 \to \infty} T^{n+1} x = e$).  
+\end{proof}
+
+\begin{remark}
+    $\rho(T^n x, T^m y) < \varepsilon$ при $n,m>N$.
+\end{remark}
 %33
-\section{Топология в пространстве C\^ \textbackslash infty(R). Метризуемость.}
+\section{Топология в пространстве бексконечно дифференцируемых над R функций. Метризуемость.}
 
 \begin{remark}
     Сходимость: будем говорить, что последовательность
@@ -841,9 +919,9 @@ $\varphi^{(s)} (t) = \sum\limits_{1 \leq k_1,...,k_s \leq n}^{} \frac{\delta^s f
 
 \begin{stat}
     $$
-    d(f,g) = \sum\limits_{j,n\geq 0} \frac{||f^{(j)}-g^{(j)}||_{\infty, I_n}}{1+||f^{(j)}-g^{(j)}||_{\infty, I_n}}
+    d(f,g) = \sum\limits_{j,n\geq 0} \frac{ 2^{j+n} ||f^{(j)}-g^{(j)}||_{\infty, I_n}}{1+||f^{(j)}-g^{(j)}||_{\infty, I_n}}
     $$
-    тогда $d$ - метрика.
+    ($I_n$ - компакты, $||\cdot||_\infty = \sup||\cdot||$) тогда $d$ - метрика.
 \end{stat}
 
 \begin{stat}
