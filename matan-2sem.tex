@@ -637,6 +637,19 @@ $\varphi^{(s)} (t) = \sum\limits_{1 \leq k_1,...,k_s \leq n}^{} \frac{\delta^s f
     и знакопеременна, если может принимать как положительные, так и отрицательные значения.
 \end{defn}
 
+\begin{remark} (Квадр. форма на сфере)
+    Легко видеть, что $Q(cx)=c^2 Q(x)$, где $c$ - скаляр, поэтому $Q(x)$ имеет тот же знак, что и $Q(cx)$,
+    т.е. вдоль фиксированного направления кв. форма имеет фиксированный знак, а значит достаточно 
+    рассматривать $x$ на сфере, чтобы определить знак кв.формы. Сфера - компакт, $Q(x)$ - непрерывная функция, 
+    а потому $Q(x)$ достигает минимума и максимума на сфере. Тогда можно составить равносильное определение
+    знака, квадратичная форма называется:
+    \begin{itemize}
+        \item положительно-определенной, если $ \displaystyle \min_{||x||=1} Q(x) > 0$
+        \item отрицательно-определенной, если $ \displaystyle \max_{||x||=1} Q(x) < 0$
+        \item знакопеременной, если $ \displaystyle \min_{||x||=1} Q(x) < 0 < \max_{||x||=1} Q(x)$
+    \end{itemize}
+\end{remark}
+
 \begin{theorem}(\add{suffextr}{Достаточное условие экстремума})
     Пусть у $f: \mathbb{R}^n \to \mathbb{R}$ в точке $x^0$ нулевой градиент и определены все смешанные производные второго порядка.
     Тогда если квадратичная форма
@@ -653,19 +666,16 @@ $\varphi^{(s)} (t) = \sum\limits_{1 \leq k_1,...,k_s \leq n}^{} \frac{\delta^s f
         f(x) = f(x^0) + \frac{1}{2} \sum\limits_{1 \leq k,l \leq n} \frac{\delta^2 f}{\delta x_k \delta x_l} (x^0) (x_k-x_k^0) (x_l-x_l^0) + o(||x-x_0||^2)
     \]
     Обозначим $a_{k,l} = \frac{1}{2} \frac{\delta^2 f}{\delta x_k \delta x_l} (x^0)$\\
-    При $x\not=x^0$ сумма $\sum\limits_{1 < k,l\leq n} a_{k,l} (x_k-x_k^0) (x_l-x_l^0) = \langle A(x-x^0), (x-x^0) \rangle > 0$
-    $\Rightarrow \exists \varepsilon>0: \ \langle A(x-x^0), (x-x^0) \rangle \geq \varepsilon ||x-x^0||^2$
+    При $x\not=x^0: \sum\limits_{1 < k,l\leq n} a_{k,l} (x_k-x_k^0) (x_l-x_l^0) = \langle A(x-x^0), (x-x^0) \rangle = Q(x-x^0) > 0$
+    $\Rightarrow \exists \varepsilon>0: \ Q(x-x^0) \geq \varepsilon ||x-x^0||^2$
 
-    \textit{Пояснение: } $\langle Ax,x \rangle > 0, x\not=0$, $A$ - линейное,
-    пусть $g(x)=\langle Ax,x \rangle$\\
-    $\Rightarrow \exists \varepsilon > 0: \ g(x) \geq \varepsilon$ при $||x||=1$ (единичная сфера), 
-    т.к. функция $g(x)$ на единичной сфере (сфера - компакт) достигает минимума и максимума,
-    также легко видеть, что $g(cx)=c^2 g(x)$, где $c$ - скаляр. 
-    Тогда $g(x)=g(||x||e)=||x||^2 g(e) \geq \varepsilon ||x||^2$, т.к. $||e||=1$.
+    \textit{Пояснение: } $Q(x)$ - положительная квадратичная форма, а потому 
+    $\displaystyle \varepsilon = \min_{||x||=1} Q(x) > 0$,
+    тогда $Q(x)=Q(||x||e)=Q(e)||x||^2 \geq \varepsilon ||x||^2$, т.к. $||e||=1$.
 
     Поделим равенство
     \[
-        f(x) - f(x^0) = \langle A(x-x^0), (x-x^0) \rangle + o(||x-x_0||^2)
+        f(x) - f(x^0) = Q(x-x^0) + o(||x-x_0||^2)
     \]
     на $||x-x^0||^2$, тогда, если $||x-x^0||$ достаточно мало, то правая часть строго положительна.
 \end{proof}
@@ -676,9 +686,19 @@ $\varphi^{(s)} (t) = \sum\limits_{1 \leq k_1,...,k_s \leq n}^{} \frac{\delta^s f
     \begin{itemize}
         \item $Q(h)$ положительна $\Leftrightarrow$ все $\lambda_k > 0$ ($x^0$ т. мин.)
         \item $Q(h)$ отрицательна $\Leftrightarrow$ все $\lambda_k < 0$ ($x^0$ т. макс.)
-        \item $Q(h)$ знакопеременна $\Leftrightarrow$ $\exists k,l: \lambda_k < 0 < \lambda_k$ ($x^0$ не т. экстр.)
+        \item $Q(h)$ знакопеременна $\Leftrightarrow$ $\exists k,l: \lambda_k < 0 < \lambda_l$ ($x^0$ не т. экстр.)
         \item иначе требуется дополнительное исследование
     \end{itemize}
+\end{remark}
+
+\begin{remark}
+    Почему, если кв. форма знакопеременна, то $x^0$ не экстремум? Зафиксируем $y_1, y_2$ т.ч. $Q(y_1) < 0 < Q(y_2)$ и $||y_1||=||y_2||=1$.
+    Тогда в равенство
+    \[
+        f(x) - f(x^0) = Q(x-x^0) + o(||x-x_0||^2)
+    \]
+    можно подставлять точки вида $x=cy_1+x^0$ ($\Rightarrow Q(x-x^0)=c^2 Q(y_1)$), в этом случае при достаточно малом $|c|=||x-x^0||$
+    правая часть строго отрицательна; если же подставлять $x=cy_2+x^0$ - строго положительна.
 \end{remark}
 
 \begin{stat}
