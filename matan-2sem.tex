@@ -1,4 +1,4 @@
-\documentclass{article}
+﻿\documentclass{article}
 \usepackage{amssymb} %math
 \usepackage{amsmath} %math
 \usepackage{cmap} %ability to copy russian
@@ -1029,7 +1029,8 @@ $\varphi^{(s)} (t) = \sum\limits_{1 \leq k_1,...,k_s \leq n}^{} \frac{\delta^s f
 
 \begin{stat}
     $$
-    d(f,g) = \sum\limits_{j,n\geq 0} \frac{ 2^{j+n} ||f^{(j)}-g^{(j)}||_{\infty, I_n}}{1+||f^{(j)}-g^{(j)}||_{\infty, I_n}}
+    d(f,g) = \sum\limits_{j,n\geq 0} \frac{ ||f^{(j)}-g^{(j)}||_{\infty,I_n}}
+    {1+||f^{(j)}-g^{(j)}||_{\infty, I_n}} 2^{-j-n}
     $$
     ($I_n$ - компакты, $||\cdot||_\infty = \sup||\cdot||$) тогда $d$ - метрика.
 \end{stat}
